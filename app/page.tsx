@@ -1,101 +1,108 @@
 import Image from "next/image";
+import Link from "next/link";
+import { inter } from "./fonts/fonts";
+import {
+  LucideBookOpenText,
+  LucideGlasses,
+  LucideLeafyGreen,
+  LucideQuote,
+  LucideTextQuote,
+} from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const navLinks = ["About", "Gallery", "Journal Camp", "Blog"];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <div className=" w-full p-2 flex  items-center justify-around bg-[#1FC439] ">
+        <div className="rounded-[9px]">
+          <Image
+            src="/logo.jpg"
+            width={120}
+            height={10}
+            alt="Fwoop Logo"
+            className=""
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <div
+          className={` ${inter.className} flex gap-x-5  w-[35%] justify-between items-center`}
         >
+          {navLinks.map((link, index) => (
+            <Link
+              href={"/"}
+              className="text-[17px] hover:text-[#047F40] hover:text-[20px] transition-all duration-500 ease-in-out"
+            >
+              {link}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <section id="hero" className="flex  w-full h-[100vh] overflow-hidden">
+        <div className="flex-1 h-full place-content-center text-[#45C355] items-center justify-start p-7 ">
+          <p className="text-center text-[#047F40] font-bold text-[50px]">
+            FWOOP{" "}
+            <span className="text-[17px]">
+              (Food Waste Optimization Outreach Project)
+            </span>
+          </p>
+          <p className="text-center">Reviving Waste - Powering the Planet.</p>
+          <p className="text-center">Pratical Solution to Food Waste.</p>
+        </div>
+        <div className=" flex-1 h-[90%]">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/heroImg.png"
+            width={0}
+            height={0}
+            layout="responsive"
+            alt="plant waste"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </div>
+      </section>
+
+      <section
+        id="info"
+        className="w-full h-[50vh] p-7 mt-4 flex items-center gap-3   justify-center  "
+      >
+        <div className=" flex items-center justify-center flex-col  w-fit h-fit p-7 text-[20px] text-[#047F40]">
+          <p className=" font-bold">ABOUT</p>
+          <LucideBookOpenText />
+          <p className="text-center text-[14px] ">
+            Fwoop is a community-driven initiative designed to educate Nigerians
+            <br /> about food sustainability and empower them with a pratical
+            strategies to <br /> minimize food waste in their daily lives.
+          </p>
+        </div>
+        <div className=" flex items-center justify-center flex-col  w-fit h-fit p-5 text-[20px] text-[#047F40]">
+          <p className=" font-bold">OUR VISION</p>
+          <LucideGlasses />
+          <p className="text-center text-[14px] text-wrap">
+            A Nigeria where healthy ,sustainable food pratices <br /> are woven
+            into the fabric of our communities,preserving our rich culinary
+            <br /> traditions and nuturing a healthier future for generations to
+            come.
+          </p>
+        </div>
+        <div className=" flex items-center justify-center flex-col  scale-[1.1] w-fit h-fit p-5 text-[20px] text-[#047F40]">
+          <p className=" font-bold">OUR MISSION </p>
+          <LucideLeafyGreen />
+          <p className="text-center text-[14px] text-wrap">
+            To educate ,empower and engage Nigerian communities <br /> in waste
+            management and sustainable pratices.
+          </p>
+        </div>
+      </section>
+
+      <section className=" w-full h-[70vh] place-content-center place-items-center ">
+        <p className="text-[30px] italic text-[#047F40] text-center">
+          “Cutting Food waste is a delicious way of saving money ,helping to
+          feed the world & protect the planet” - Tristian S.
+          <span className="text-[#047F40]"></span>
+        </p>
+      </section>
+
+      
+    </>
   );
 }
