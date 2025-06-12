@@ -10,34 +10,11 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  const navLinks = ["About", "Gallery", "Journal Camp", "Blog"];
+
 
   return (
     <>
-      <div className=" w-full p-2 flex  items-center justify-around bg-[#1FC439] ">
-        <div className="rounded-[9px]">
-          <Image
-            src="/logo.jpg"
-            width={120}
-            height={10}
-            alt="Fwoop Logo"
-            className=""
-          />
-        </div>
-
-        <div
-          className={` ${inter.className} flex gap-x-5  w-[35%] justify-between items-center`}
-        >
-          {navLinks.map((link, index) => (
-            <Link
-              href={"/"}
-              className="text-[17px] hover:text-[#047F40] hover:text-[20px] transition-all duration-500 ease-in-out"
-            >
-              {link}
-            </Link>
-          ))}
-        </div>
-      </div>
+      
 
       <section id="hero" className="flex  w-full h-[100vh] overflow-hidden">
         <div className="flex-1 h-full place-content-center text-[#45C355] items-center justify-start p-7 ">
