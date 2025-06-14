@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button, Badge } from "@radix-ui/themes";
@@ -14,8 +14,11 @@ import {
 } from "./ui/select";
 import { School, Calendar, BookOpen, Check, Plus } from "lucide-react";
 import { useToast } from "./ui/use-toast";
+import axios from "axios";
 
 const JournalEntry = () => {
+  
+
   const [formData, setFormData] = useState({
     schoolName: "",
     date: "",
@@ -45,7 +48,7 @@ const JournalEntry = () => {
     setMilestones((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.schoolName || !formData.date || !formData.actions) {
@@ -59,22 +62,29 @@ const JournalEntry = () => {
 
     console.log("Journal Entry Submitted:", { ...formData, milestones });
 
-    toast({
-      title: "Journal Entry Submitted! 🌱",
-      description:
-        "Your food waste journey progress has been recorded successfully.",
-    });
-
-    setFormData({
-      schoolName: "",
-      date: "",
-      wasteReduction: "",
-      actions: "",
-      challenges: "",
-      nextSteps: "",
-      wasteAmount: "",
-    });
-    setMilestones([]);
+    try {
+      const response = await axios.post(
+        "https://foodproj-backend-4y4z.onrender.com/api/journal/add",
+        formData
+      );
+      toast({
+        title: "Journal Entry Submitted! 🌱",
+        description:
+          "Your food waste journey progress has been recorded successfully.",
+      });
+      setFormData({
+        schoolName: "",
+        date: "",
+        wasteReduction: "",
+        actions: "",
+        challenges: "",
+        nextSteps: "",
+        wasteAmount: "",
+      });
+      setMilestones([]);
+    } catch (error) {
+      console.error("Failed to send data", error);
+    }
   };
 
   return (
@@ -112,7 +122,9 @@ const JournalEntry = () => {
                       id="schoolName"
                       placeholder="Enter school name"
                       value={formData.schoolName}
-                      onChange={(e) => handleInputChange("schoolName", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("schoolName", e.target.value)
+                      }
                     />
                   </div>
                   <div className="space-y-2">
@@ -121,27 +133,35 @@ const JournalEntry = () => {
                       id="date"
                       type="date"
                       value={formData.date}
-                      onChange={(e) => handleInputChange("date", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("date", e.target.value)
+                      }
                     />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="wasteAmount">Current Waste Amount (kg/day)</Label>
+                    <Label htmlFor="wasteAmount">
+                      Current Waste Amount (kg/day)
+                    </Label>
                     <Input
                       id="wasteAmount"
                       type="number"
                       placeholder="e.g., 25"
                       value={formData.wasteAmount}
-                      onChange={(e) => handleInputChange("wasteAmount", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("wasteAmount", e.target.value)
+                      }
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="wasteReduction">Waste Reduction Goal</Label>
                     <Select
                       value={formData.wasteReduction}
-                      onValueChange={(value) => handleInputChange("wasteReduction", value)}
+                      onValueChange={(value) =>
+                        handleInputChange("wasteReduction", value)
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select reduction target" />
@@ -163,7 +183,9 @@ const JournalEntry = () => {
                     placeholder="Describe actions taken to reduce food waste..."
                     className="min-h-[100px]"
                     value={formData.actions}
-                    onChange={(e) => handleInputChange("actions", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("actions", e.target.value)
+                    }
                   />
                 </div>
 
@@ -209,7 +231,9 @@ const JournalEntry = () => {
                     placeholder="What obstacles did you encounter?"
                     className="min-h-[80px]"
                     value={formData.challenges}
-                    onChange={(e) => handleInputChange("challenges", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("challenges", e.target.value)
+                    }
                   />
                 </div>
 
@@ -220,7 +244,9 @@ const JournalEntry = () => {
                     placeholder="Plans for the next period"
                     className="min-h-[80px]"
                     value={formData.nextSteps}
-                    onChange={(e) => handleInputChange("nextSteps", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("nextSteps", e.target.value)
+                    }
                   />
                 </div>
 

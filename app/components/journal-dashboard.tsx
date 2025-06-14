@@ -1,45 +1,48 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "@radix-ui/themes";
 import { Badge } from "@radix-ui/themes";
 import { Progress } from "./ui/progress";
 import { School, Calendar, BookOpen, Plus, Check } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
+
+export type WasteReport = {
+  id: number;
+  schoolName: string;
+  date: Date;
+  wasteReduction: string;
+  wasteAmount: string;
+  progress?: number;
+  actions: string;
+  challenges: string;
+  nextSteps: string;
+  milestones: string[];
+};
+
 
 const JournalDashboard = () => {
-  const journalEntries = [
-    {
-      id: 1,
-      schoolName: "ABC Elementary School",
-      date: "2024-06-05",
-      wasteReduction: "25",
-      wasteAmount: "15",
-      progress: 75,
-      milestones: ["Started composting program", "Reduced lunch waste by 20%"],
-    },
-    {
-      id: 2,
-      schoolName: "Green Valley High",
-      date: "2024-06-03",
-      wasteReduction: "50",
-      wasteAmount: "8",
-      progress: 60,
-      milestones: ["Implemented portion control", "Student awareness campaign"],
-    },
-    {
-      id: 3,
-      schoolName: "Sunshine Primary",
-      date: "2024-06-01",
-      wasteReduction: "10",
-      wasteAmount: "22",
-      progress: 30,
-      milestones: ["Food waste tracking started"],
-    },
-  ];
+
+  const [journalEntries,setJournalEntries] = useState<Array<WasteReport>>([])
+  
+
+  useEffect(() => {
+    const getJournalEntries = async () => {
+       try {
+   const response =  await axios.get("http://localhost:4000/api/journal/getJournals")
+   setJournalEntries(response?.data?.data)
+  } catch (error) {
+    console.log("An Error occurred:",error)
+  }
+    }
+    getJournalEntries();
+  }, [])
+  
+ 
 
   const leaderboardData = journalEntries
-    .sort((a, b) => b.progress - a.progress)
+    .sort((a, b) => (b.progress ?? 0) - (a.progress ?? 0))
     .map((entry, index) => ({ ...entry, rank: index + 1 }));
 
   return (
