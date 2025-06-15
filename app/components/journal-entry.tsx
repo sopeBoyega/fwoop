@@ -15,9 +15,12 @@ import {
 import { School, Calendar, BookOpen, Check, Plus } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
+import DotsSpinner from "./spinners/DotsSpinner";
 
 const JournalEntry = () => {
   
+
+  const [loading,setLoading] = useState<boolean>(false)
 
   const [formData, setFormData] = useState({
     schoolName: "",
@@ -63,9 +66,11 @@ const JournalEntry = () => {
     console.log("Journal Entry Submitted:", { ...formData, milestones });
 
     try {
+
+      setLoading(true)
       const response = await axios.post(
         "https://foodproj-backend-4y4z.onrender.com/api/journal/add",
-        formData
+        {...formData,milestones}
       );
       toast({
         title: "Journal Entry Submitted! 🌱",
@@ -84,6 +89,9 @@ const JournalEntry = () => {
       setMilestones([]);
     } catch (error) {
       console.error("Failed to send data", error);
+    }
+    finally {
+      setLoading(false)
     }
   };
 
@@ -252,7 +260,7 @@ const JournalEntry = () => {
 
                 <div className="flex justify-end pt-4">
                   <Button type="submit">
-                    <BookOpen className="h-5 w-5 mr-2" /> Submit Journal Entry
+                    {loading ? <DotsSpinner color="#ffffff"/> : <><BookOpen className="h-5 w-5 mr-2" /> Submit Journal Entry</>}
                   </Button>
                 </div>
               </form>

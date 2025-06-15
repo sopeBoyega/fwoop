@@ -7,6 +7,10 @@ import { Progress } from "./ui/progress";
 import { School, Calendar, BookOpen, Plus, Check } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
+import BarsSpinner from "./spinners/BarsSpinner";
+import ClassicRingSpinner from "./spinners/ClassicRingSpinner";
+import PinwheelSpinner from "./spinners/PinwheelSpinner";
+import PulseSpinner from "./spinners/PulseSpinner";
 
 export type WasteReport = {
   id: number;
@@ -25,19 +29,28 @@ export type WasteReport = {
 const JournalDashboard = () => {
 
   const [journalEntries,setJournalEntries] = useState<Array<WasteReport>>([])
+    const [loading,setLoading] = useState<boolean>(false)
   
 
   useEffect(() => {
-    const getJournalEntries = async () => {
-       try {
-   const response =  await axios.get("http://localhost:4000/api/journal/getJournals")
-   setJournalEntries(response?.data?.data)
-  } catch (error) {
-    console.log("An Error occurred:",error)
-  }
-    }
-    getJournalEntries();
-  }, [])
+   const getJournalEntries = async () => {
+     try {
+      setLoading(true)
+       const response = await axios.get("https://foodproj-backend-4y4z.onrender.com/api/journal/getJournals", {
+         headers: {
+           "Cache-Control": "no-cache",
+         }
+       });
+       setJournalEntries(response?.data?.data);
+     } catch (error) {
+       console.error("An Error occurred:", error || error);
+     }
+     finally{
+      setLoading(false)
+     }
+   };
+   getJournalEntries();
+ }, []);
   
  
 
@@ -85,9 +98,10 @@ const JournalDashboard = () => {
                 Recent Journal Entries
               </h2>
 
-              {journalEntries.map((entry) => (
+              {loading ? <BarsSpinner/> : journalEntries.map((entry) => (
+                <Link  key={entry.id} href={`/journalCamp/${entry.id}`}>
                 <Card
-                  key={entry.id}
+                 
                   className="shadow-md border border-green-200 hover:shadow-lg transition-shadow"
                 >
                   <CardHeader className="pb-3">
@@ -155,6 +169,7 @@ const JournalDashboard = () => {
                     )}
                   </CardContent>
                 </Card>
+                </Link>
               ))}
             </div>
 

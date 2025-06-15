@@ -17,17 +17,22 @@ const JournalDetail = () => {
 
   // Mock data - in real app this would come from your database based on the ID
 
-  useEffect(() => {
-    const getJournalEntries = async () => {
-       try {
-   const response =  await axios.get("http://localhost:4000/api/journal/getJournals")
-   setJournalEntries(response?.data?.data)
-  } catch (error) {
-    console.log("An Error occurred:",error)
-  }
+ useEffect(() => {
+  const getJournalEntries = async () => {
+    try {
+      const response = await axios.get("https://foodproj-backend-4y4z.onrender.com/api/journal/getJournals", {
+        headers: {
+          "Cache-Control": "no-cache",
+        }
+      });
+      setJournalEntries(response?.data?.data);
+    } catch (error) {
+      console.error("An Error occurred:", error || error);
     }
-    getJournalEntries();
-  }, [])
+  };
+  getJournalEntries();
+}, []);
+
 const idString = Array.isArray(id) ? id[0] : id ?? '1';
 const entry = (journalEntries ?? []).find(e => e.id === parseInt(idString, 10));
 
@@ -93,7 +98,7 @@ if (!journalEntries?.length) {
           </Card>
 
           {/* Milestones */}
-          {entry?.milestones?.length || 0 > 0 && (
+          {(entry?.milestones?.length ?? 0) > 0 && (
             <Card className="shadow-md border-primary/20 animate-scale-in mb-6">
               <CardHeader>
                 <CardTitle className="text-primary flex items-center gap-2">

@@ -4,6 +4,8 @@ import { inter, PJS } from "./fonts/fonts";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Header from "./components/global/header";
+import Footer from "./components/global/Footer";
+import { Toaster } from "./components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "FWOOP",
@@ -26,7 +28,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}  bg-white text-white`}>
         <Header navLinks={navLinks} />
+        <Toaster/>
         <Theme>{children}</Theme>
+        <Footer/>
       </body>
     </html>
   );

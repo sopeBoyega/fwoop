@@ -1,33 +1,32 @@
 import Image from "next/image";
-import Link from "next/link";
-import { inter } from "./fonts/fonts";
+import QuickStats from "./components/stats";
+import SponsorsSection from "./components/sponsors";
+import ImpactStats from "./components/impact";
 import {
   LucideBookOpenText,
   LucideGlasses,
   LucideLeafyGreen,
-  LucideQuote,
-  LucideTextQuote,
 } from "lucide-react";
 
 export default function Home() {
-
-
   return (
     <>
-      
-
-      <section id="hero" className="flex  w-full h-[100vh] overflow-hidden">
-        <div className="flex-1 h-full place-content-center text-[#45C355] items-center justify-start p-7 ">
-          <p className="text-center text-[#047F40] font-bold text-[50px]">
+      {/* HERO */}
+      <section
+        id="hero"
+        className="w-full min-h-screen flex flex-col md:flex-row items-center justify-between px-6 py-10 bg-white"
+      >
+        <div className="md:w-1/2 text-center md:text-left space-y-4 text-[#047F40]">
+          <h1 className="font-bold text-4xl md:text-5xl leading-tight">
             FWOOP{" "}
-            <span className="text-[17px]">
+            <span className="text-lg block font-normal">
               (Food Waste Optimization Outreach Project)
             </span>
-          </p>
-          <p className="text-center">Reviving Waste - Powering the Planet.</p>
-          <p className="text-center">Pratical Solution to Food Waste.</p>
+          </h1>
+          <p>Reviving Waste - Powering the Planet.</p>
+          <p>Practical Solution to Food Waste.</p>
         </div>
-        <div className=" flex-1 h-[90%]">
+        <div className="md:w-1/2 mt-10 md:mt-0">
           <Image
             src="/heroImg.png"
             width={0}
@@ -38,48 +37,77 @@ export default function Home() {
         </div>
       </section>
 
+      {/* INFO BLOCKS */}
       <section
         id="info"
-        className="w-full h-[50vh] p-7 mt-4 flex items-center gap-3   justify-center  "
+        className="w-full py-16 px-6 bg-green-50"
       >
-        <div className=" flex items-center justify-center flex-col  w-fit h-fit p-7 text-[20px] text-[#047F40]">
-          <p className=" font-bold">ABOUT</p>
-          <LucideBookOpenText />
-          <p className="text-center text-[14px] ">
-            Fwoop is a community-driven initiative designed to educate Nigerians
-            <br /> about food sustainability and empower them with a pratical
-            strategies to <br /> minimize food waste in their daily lives.
-          </p>
-        </div>
-        <div className=" flex items-center justify-center flex-col  w-fit h-fit p-5 text-[20px] text-[#047F40]">
-          <p className=" font-bold">OUR VISION</p>
-          <LucideGlasses />
-          <p className="text-center text-[14px] text-wrap">
-            A Nigeria where healthy ,sustainable food pratices <br /> are woven
-            into the fabric of our communities,preserving our rich culinary
-            <br /> traditions and nuturing a healthier future for generations to
-            come.
-          </p>
-        </div>
-        <div className=" flex items-center justify-center flex-col  scale-[1.1] w-fit h-fit p-5 text-[20px] text-[#047F40]">
-          <p className=" font-bold">OUR MISSION </p>
-          <LucideLeafyGreen />
-          <p className="text-center text-[14px] text-wrap">
-            To educate ,empower and engage Nigerian communities <br /> in waste
-            management and sustainable pratices.
-          </p>
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 justify-between text-center text-[#047F40]">
+          {/* ABOUT */}
+          <div className="flex-1 space-y-3">
+            <p className="text-xl font-bold">ABOUT</p>
+            <LucideBookOpenText className="mx-auto" />
+            <p className="text-sm">
+              Fwoop is a community-driven initiative designed to educate Nigerians
+              about food sustainability and empower them with practical strategies
+              to minimize food waste in their daily lives.
+            </p>
+          </div>
+
+          {/* VISION */}
+          <div className="flex-1 space-y-3">
+            <p className="text-xl font-bold">OUR VISION</p>
+            <LucideGlasses className="mx-auto" />
+            <p className="text-sm">
+              A Nigeria where healthy, sustainable food practices are woven into
+              the fabric of our communities, preserving our rich culinary
+              traditions and nurturing a healthier future for generations to come.
+            </p>
+          </div>
+
+          {/* MISSION */}
+          <div className="flex-1 space-y-3 scale-105">
+            <p className="text-xl font-bold">OUR MISSION</p>
+            <LucideLeafyGreen className="mx-auto" />
+            <p className="text-sm">
+              To educate, empower and engage Nigerian communities in waste
+              management and sustainable practices.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className=" w-full h-[70vh] place-content-center place-items-center ">
-        <p className="text-[30px] italic text-[#047F40] text-center">
-          “Cutting Food waste is a delicious way of saving money ,helping to
-          feed the world & protect the planet” - Tristian S.
-          <span className="text-[#047F40]"></span>
-        </p>
+      {/* QUOTE */}
+      <section className="w-full py-16 px-6 bg-white">
+        <div className="max-w-3xl mx-auto text-center text-[#047F40]">
+          <p className="text-xl md:text-2xl italic leading-relaxed">
+            “Cutting food waste is a delicious way of saving money, helping to
+            feed the world & protect the planet.”
+          </p>
+          <p className="mt-2 text-sm">– Tristram Stuart</p>
+        </div>
       </section>
 
-      
+      {/* QUICK STATS */}
+      <section className="py-16 px-6 bg-green-50">
+        <div className="max-w-6xl mx-auto">
+          <QuickStats />
+        </div>
+      </section>
+
+      {/* SPONSORS */}
+      <section className="py-16 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <SponsorsSection />
+        </div>
+      </section>
+
+      {/* IMPACT */}
+      <section className="py-16 px-6 bg-green-50">
+        <div className="max-w-6xl mx-auto">
+          <ImpactStats />
+        </div>
+      </section>
     </>
   );
 }
