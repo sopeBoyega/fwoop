@@ -1,9 +1,9 @@
 import React from 'react'
 import JournalDashboard from '../components/journal-dashboard'
 
-type Props = {}
 
-const page = (props: Props) => {
+
+const page = () => {
   return (
   <div>
     <JournalDashboard/>

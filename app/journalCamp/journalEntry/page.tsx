@@ -1,9 +1,9 @@
 import JournalEntry from '@/app/components/journal-entry'
 import React from 'react'
 
-type Props = {}
 
-const page = (props: Props) => {
+
+const page = () => {
   return (
     <div>
         <JournalEntry/>

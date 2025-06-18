@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { School, Calendar, BookOpen, Check, Plus } from "lucide-react";
+import { School, BookOpen, Check, Plus } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
 import DotsSpinner from "./spinners/DotsSpinner";

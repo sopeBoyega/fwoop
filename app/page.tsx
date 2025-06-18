@@ -78,8 +78,8 @@ export default function Home() {
       </section>
 
       {/* QUOTE */}
-      <section className="w-full py-16 px-6 bg-white">
-        <div className="max-w-3xl mx-auto text-center text-[#047F40]">
+      <section className="w-full py-[5rem] px-6 bg-[#1A1A1A]">
+        <div className="max-w-3xl mx-auto text-center text-[#B0B0B0]">
           <p className="text-xl md:text-2xl italic leading-relaxed">
             “Cutting food waste is a delicious way of saving money, helping to
             feed the world & protect the planet.”

@@ -8,9 +8,7 @@ import { School, Calendar, BookOpen, Plus, Check } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
 import BarsSpinner from "./spinners/BarsSpinner";
-import ClassicRingSpinner from "./spinners/ClassicRingSpinner";
-import PinwheelSpinner from "./spinners/PinwheelSpinner";
-import PulseSpinner from "./spinners/PulseSpinner";
+
 
 export type WasteReport = {
   id: number;
@@ -25,34 +23,31 @@ export type WasteReport = {
   milestones: string[];
 };
 
-
 const JournalDashboard = () => {
-
-  const [journalEntries,setJournalEntries] = useState<Array<WasteReport>>([])
-    const [loading,setLoading] = useState<boolean>(false)
-  
+  const [journalEntries, setJournalEntries] = useState<Array<WasteReport>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-   const getJournalEntries = async () => {
-     try {
-      setLoading(true)
-       const response = await axios.get("https://foodproj-backend-4y4z.onrender.com/api/journal/getJournals", {
-         headers: {
-           "Cache-Control": "no-cache",
-         }
-       });
-       setJournalEntries(response?.data?.data);
-     } catch (error) {
-       console.error("An Error occurred:", error || error);
-     }
-     finally{
-      setLoading(false)
-     }
-   };
-   getJournalEntries();
- }, []);
-  
- 
+    const getJournalEntries = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://foodproj-backend-4y4z.onrender.com/api/journal/getJournals",
+          {
+            headers: {
+              "Cache-Control": "no-cache",
+            },
+          }
+        );
+        setJournalEntries(response?.data?.data);
+      } catch (error) {
+        console.error("An Error occurred:", error || error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getJournalEntries();
+  }, []);
 
   const leaderboardData = journalEntries
     .sort((a, b) => (b.progress ?? 0) - (a.progress ?? 0))
@@ -98,79 +93,80 @@ const JournalDashboard = () => {
                 Recent Journal Entries
               </h2>
 
-              {loading ? <BarsSpinner/> : journalEntries.map((entry) => (
-                <Link  key={entry.id} href={`/journalCamp/${entry.id}`}>
-                <Card
-                 
-                  className="shadow-md border border-green-200 hover:shadow-lg transition-shadow"
-                >
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between">
-                      <CardTitle className="text-green-800 text-lg flex items-center gap-2">
-                        <School className="h-5 w-5" />
-                        {entry.schoolName}
-                      </CardTitle>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <Calendar className="h-4 w-4" />
-                        {new Date(entry.date).toLocaleDateString()}
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <div className="text-sm text-gray-500 mb-1">
-                          Current Waste
+              {loading ? (
+                <BarsSpinner />
+              ) : (
+                [...journalEntries].reverse().map((entry) => (
+                  <Link key={entry.id} href={`/journalCamp/${entry.id}`}>
+                    <Card className="shadow-md border border-green-200 hover:shadow-lg transition-shadow">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-green-800 text-lg flex items-center gap-2">
+                            <School className="h-5 w-5" />
+                            {entry.schoolName}
+                          </CardTitle>
+                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <Calendar className="h-4 w-4" />
+                            {new Date(entry.date).toLocaleDateString()}
+                          </div>
                         </div>
-                        <div className="text-2xl font-bold text-green-800">
-                          {entry.wasteAmount} kg/day
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <div className="text-sm text-gray-500 mb-1">
+                              Current Waste
+                            </div>
+                            <div className="text-2xl font-bold text-green-800">
+                              {entry.wasteAmount} kg/day
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-sm text-gray-500 mb-1">
+                              Reduction Goal
+                            </div>
+                            <div className="text-2xl font-bold text-green-600">
+                              {entry.wasteReduction}%
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-gray-500 mb-1">
-                          Reduction Goal
-                        </div>
-                        <div className="text-2xl font-bold text-green-600">
-                          {entry.wasteReduction}%
-                        </div>
-                      </div>
-                    </div>
 
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-500">
-                          Progress
-                        </span>
-                        <span className="text-sm font-bold text-green-800">
-                          {entry.progress}%
-                        </span>
-                      </div>
-                      <Progress value={entry.progress} className="h-2" />
-                    </div>
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-gray-500">
+                              Progress
+                            </span>
+                            <span className="text-sm font-bold text-green-800">
+                              {entry.progress}%
+                            </span>
+                          </div>
+                          <Progress value={entry.progress} className="h-2" />
+                        </div>
 
-                    {entry.milestones.length > 0 && (
-                      <div>
-                        <div className="text-sm font-medium text-gray-500 mb-2">
-                          Latest Milestones
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {entry.milestones.map((milestone, index) => (
-                            <Badge
-                              key={index}
-                              variant="solid"
-                              className="bg-green-100 text-green-700"
-                            >
-                              <Check className="h-3 w-3 mr-1" />
-                              {milestone}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-                </Link>
-              ))}
+                        {entry.milestones.length > 0 && (
+                          <div>
+                            <div className="text-sm font-medium text-gray-500 mb-2">
+                              Latest Milestones
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {entry.milestones.map((milestone, index) => (
+                                <Badge
+                                  key={index}
+                                  variant="solid"
+                                  className="bg-green-100 text-green-700"
+                                >
+                                  <Check className="h-3 w-3 mr-1" />
+                                  {milestone}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))
+              )}
             </div>
 
             {/* Leadership Board */}
@@ -227,20 +223,14 @@ const JournalDashboard = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-500">
-                      Participating Schools
-                    </span>
+                    <span className="text-gray-500">Participating Schools</span>
                     <span className="font-bold text-green-800">
                       {journalEntries.length}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-500">
-                      Total Waste Reduced
-                    </span>
-                    <span className="font-bold text-green-600">
-                      127 kg/day
-                    </span>
+                    <span className="text-gray-500">Total Waste Reduced</span>
+                    <span className="font-bold text-green-600">127 kg/day</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Active Programs</span>

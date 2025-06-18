@@ -15,7 +15,7 @@ interface HeaderProps {
 const Header = ({navLinks}: HeaderProps) => {
   return (
     <div>
-        <div className=" w-full p-2 flex  items-center justify-around bg-[#1FC439] ">
+        <div className=" w-full p-2 flex  items-center justify-around bg-[#0F3D2E] ">
                 <div className="rounded-[9px]">
                   <Image
                     src="/logo.jpg"
