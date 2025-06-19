@@ -2,7 +2,6 @@
 import React from "react";
 import BlogCard from "../components/BlogPage/BlogCard";
 import { Button } from "../components/ui/button";
-import { Plus } from "lucide-react";
 import Link from "next/link";
 
 // Placeholder images from public URLs

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { inter, PJS } from "./fonts/fonts";
+import { inter} from "./fonts/fonts";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Header from "./components/global/header";

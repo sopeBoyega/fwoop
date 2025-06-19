@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const sponsors = [
   { name: "NGGA", img: "https://via.placeholder.com/100" },
@@ -18,14 +19,16 @@ const SponsorsSection = () => {
       {/* Avatars */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
         {sponsors.map((sponsor, index) => (
-          <div key={index} className="flex flex-col items-center space-y-2">
-            <img
+            <div key={index} className="flex flex-col items-center space-y-2">
+            <Image
               src={sponsor.img}
-              alt=""
+              alt={sponsor.name}
+              width={80}
+              height={80}
               className="w-20 h-20 rounded-full object-cover border-2 border-green-500"
             />
             <p className="text-sm text-gray-700">{sponsor.name}</p>
-          </div>
+            </div>
         ))}
       </div>
     </div>

@@ -4,6 +4,7 @@ import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { School } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface BlogPostSummary {
   id: number;
@@ -20,11 +21,14 @@ const BlogCard: React.FC<{ post: BlogPostSummary }> = ({ post }) => {
     <Link href={`/blog/${post.id}`} aria-label={`View blog post: ${post.title}`}>
       <Card className="transition-transform hover:scale-105 shadow hover:shadow-lg border-primary/20 hover:border-primary/40">
         <div className="aspect-w-16 aspect-h-9 w-full rounded-t-lg overflow-hidden bg-muted">
-          <img
+          <Image
             src={post.image}
             alt={post.title}
             className="object-cover w-full h-48"
+            width={640}
+            height={360}
             loading="lazy"
+            style={{ width: "100%", height: "12rem" }}
           />
         </div>
         <CardContent>

@@ -1,6 +1,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Example images (Unsplash IDs from placeholder list)
 const images = [
@@ -33,11 +34,16 @@ const Gallery = () => (
             className="rounded-xl overflow-hidden shadow-lg group relative bg-card animate-fade-in"
             style={{ animationDelay: `${idx * 80}ms` }}
           >
-            <img
+            <Image
               src={src}
               alt={`Gallery image ${idx + 1}`}
               className="object-cover w-full h-52 sm:h-48 md:h-44 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:brightness-110 group-hover:animate-pulse ease-cubic-bezier"
+              width={800}
+              height={208}
+              style={{ width: "100%", height: "auto" }}
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, 25vw"
+              priority={idx < 2}
             />
             <div className="absolute inset-0 pointer-events-none rounded-xl border border-primary opacity-0 group-hover:opacity-60 transition-all duration-300 animate-none group-hover:animate-scale-in" />
           </div>

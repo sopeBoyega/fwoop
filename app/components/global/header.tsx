@@ -32,6 +32,7 @@ const Header = ({navLinks}: HeaderProps) => {
                   {navLinks.map((link, index) => (
                     <Link
                       href={link.url}
+                      key={index}
                       className="text-[17px] hover:text-[#047F40] hover:text-[20px] transition-all duration-500 ease-in-out"
                     >
                       {link.name}

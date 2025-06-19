@@ -68,7 +68,7 @@ const JournalEntry = () => {
     try {
 
       setLoading(true)
-      const response = await axios.post(
+      await axios.post(
         "https://foodproj-backend-4y4z.onrender.com/api/journal/add",
         {...formData,milestones}
       );
@@ -109,7 +109,7 @@ const JournalEntry = () => {
               </h1>
             </div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Track your school's progress in reducing food waste and inspire
+              Track your school&apos;s progress in reducing food waste and inspire
               change in your community
             </p>
           </div>
