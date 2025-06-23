@@ -4,7 +4,7 @@ import { inter} from "./fonts/fonts";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Header from "./components/global/header";
-import Footer from "./components/global/footer";
+import Footer from "./components/global/Footer";
 import { Toaster } from "./components/ui/toaster";
 
 export const metadata: Metadata = {
