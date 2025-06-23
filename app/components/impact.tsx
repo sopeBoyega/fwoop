@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import CountUp from "react-countup";
-import { GraduationCap, Presentation, Leaf } from "lucide-react";
+import { GraduationCap, Presentation} from "lucide-react";
 
 const impactData = [
   {
