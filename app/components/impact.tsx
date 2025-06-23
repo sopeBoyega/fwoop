@@ -6,21 +6,21 @@ import { GraduationCap, Presentation, Leaf } from "lucide-react";
 const impactData = [
   {
     label: "Students Reached",
-    value: 5200,
+    value: 200,
     suffix: "+",
     icon: <GraduationCap className="text-green-600" />,
   },
   {
     label: "Workshops Held",
-    value: 45,
+    value: 1,
     icon: <Presentation className="text-green-600" />,
   },
-  {
-    label: "Compost Generated",
-    value: 1.8,
-    suffix: " Tons",
-    icon: <Leaf className="text-green-600" />,
-  },
+  // {
+  //   label: "Compost Generated",
+  //   value: null,
+  //   suffix: " Tons",
+  //   icon: <Leaf className="text-green-600" />,
+  // },
 ];
 
 const ImpactStats = () => {
@@ -30,7 +30,7 @@ const ImpactStats = () => {
         Our Impact So Far 🌱
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-center">
         {impactData.map((item, index) => (
           <div
             key={index}

@@ -11,22 +11,22 @@ const contacts = [
   },
   {
     label: "Instagram",
-    value: "nggagslguides",
+    value: "stephanieesenwa",
     icon: Instagram,
-    href: "https://www.instagram.com/nggagslguides",
+    href: "https://www.instagram.com/stephanieesenwa",
   },
   {
     label: "Phone",
-    value: "+234 90 3620 0073",
+    value: "+234 90 3620 0031",
     icon: Phone,
-    href: "tel:+2349036200073",
+    href: "tel:+2349036200031",
   },
 ];
 
 const socials = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/nggagslguides",
+    href: "https://www.instagram.com/stephanieesenwa",
     icon: Instagram,
   },
   {
@@ -36,7 +36,7 @@ const socials = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: "https://www.linkedin.com/in/stephanie-esenwa-480844286",
     icon: Linkedin,
   },
 ];

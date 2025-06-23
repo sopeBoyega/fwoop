@@ -2,10 +2,8 @@ import React from "react";
 import Image from "next/image";
 
 const sponsors = [
-  { name: "NGGA", img: "https://via.placeholder.com/100" },
-  { name: "Eselecious", img: "https://via.placeholder.com/100" },
-  { name: "Lagos Ministry of Education", img: "https://via.placeholder.com/100" },
-  { name: "Farmer", img: "https://via.placeholder.com/100" },
+  { name: "NGGA", img: "/ngga.jpg" },
+  { name: "Eselecious", img: "/Esefoods.jpg" },
 ];
 
 const SponsorsSection = () => {
@@ -17,7 +15,7 @@ const SponsorsSection = () => {
       </h2>
 
       {/* Avatars */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-2 gap-6 justify-items-center">
         {sponsors.map((sponsor, index) => (
             <div key={index} className="flex flex-col items-center space-y-2">
             <Image
