@@ -1,5 +1,4 @@
 import { inter } from '@/app/fonts/fonts'
-import { LucideMenuSquare } from 'lucide-react';
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -45,7 +44,7 @@ const Header = ({navLinks}: HeaderProps) => {
 
 
               
-                <LucideMenuSquare color='green' width={150} className='md:hidden'/>
+                
                
               </div>
     </div>

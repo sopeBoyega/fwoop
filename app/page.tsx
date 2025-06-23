@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import QuickStats from "./components/stats";
 import SponsorsSection from "./components/sponsors";
@@ -6,12 +7,64 @@ import {
   LucideBookOpenText,
   LucideGlasses,
   LucideLeafyGreen,
+  LucideMenuSquare,
 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [sidebarState, setSidebarState] = useState<boolean>(false);
+
+  const navLinks = [
+    { name: "About", url: "/" },
+    { name: "Gallery", url: "/gallery" },
+    { name: "Journal Camp", url: "/journalCamp" },
+    { name: "Blog", url: "/blog" },
+  ];
   return (
     <>
+      <button
+        className="fixed top-5 right-5 z-[1100] md:hidden bg-[#047F40] p-2 rounded-full shadow-lg text-white"
+        onClick={() => setSidebarState(true)}
+      >
+        <LucideMenuSquare color="white" width={30}  />
+      </button>
+      {sidebarState && (
+        <div
+          className="md:hidden fixed inset-0 bg-black bg-opacity-60 z-[1000]"
+          onClick={() => setSidebarState(false)}
+        >
+          <div
+            className="h-full w-[75%] bg-gradient-to-b from-green-100 to-green-200 shadow-xl rounded-l-3xl p-5 flex flex-col z-50"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
+              <Image src="/Logo.svg" width={40} height={36.67} alt="Logo" />
+              <button
+                className="text-xl font-semibold text-gray-700 hover:text-red-500 transition"
+                onClick={() => setSidebarState(false)}
+              >
+                &times;
+              </button>
+            </div>
+
+            {/* Nav Links */}
+            <nav className="flex flex-col gap-4">
+              {navLinks.map((item, key) => (
+                <Link
+                  key={key}
+                  href={item.url}
+                  className="bg-white hover:bg-green-300 hover:text-white text-[#047F40] px-4 py-3 rounded-lg shadow-md font-medium transition duration-300"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
       {/* HERO */}
       <section
         id="hero"
@@ -35,11 +88,10 @@ export default function Home() {
             A practical solution for a global food waste crisis.
           </p>
           <div>
-            <Link
-            href="/journalCamp">
-            <button className="mt-4 px-6 py-3 bg-[#047F40] hover:bg-green-800 text-white rounded-xl shadow-lg transition duration-300">
-              Join the Movement
-            </button>
+            <Link href="/journalCamp">
+              <button className="mt-4 px-6 py-3 bg-[#047F40] hover:bg-green-800 text-white rounded-xl shadow-lg transition duration-300">
+                Join the Movement
+              </button>
             </Link>
           </div>
         </div>
