@@ -22,7 +22,7 @@ const BlogCard: React.FC<{ post: BlogPostSummary }> = ({ post }) => {
       <Card className="transition-transform hover:scale-105 shadow hover:shadow-lg border-primary/20 hover:border-primary/40">
         <div className="aspect-w-16 aspect-h-9 w-full rounded-t-lg overflow-hidden bg-muted">
           <Image
-            src={post.image}
+            src="/logo.jpg"
             alt={post.title}
             className="object-cover w-full h-48"
             width={640}
