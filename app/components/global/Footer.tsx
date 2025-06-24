@@ -56,7 +56,7 @@ const Footer = () => (
           Food Waste Optimization Outreach Project
         </span>
         <span className="text-sm text-muted-foreground opacity-90 italic">
-          Powered by Students for Students
+         Reviving Waste - Powering the Planet
         </span>
       </div>
       {/* Center: Contact */}
@@ -120,7 +120,7 @@ const Footer = () => (
     </div>
     {/* Footer legal */}
     <div className="w-full text-center py-3 bg-school-green-light border-t border-school-green opacity-95 animate-fade-in text-sm text-primary font-medium tracking-wide">
-      &copy; {new Date().getFullYear()} FWOOP
+     Mosope  &copy; {new Date().getFullYear()} FWOOP
     </div>
   </footer>
 );
