@@ -7,7 +7,6 @@ import {
   LucideBookOpenText,
   LucideGlasses,
   LucideLeafyGreen,
-  LucideMenuSquare,
 } from "lucide-react";
 import Link from "next/link";
 // import { useState } from "react";
@@ -15,12 +14,7 @@ import Link from "next/link";
 export default function Home() {
   // const [sidebarState, setSidebarState] = useState<boolean>(false);
 
-  const navLinks = [
-    { name: "About", url: "/" },
-    { name: "Gallery", url: "/gallery" },
-    { name: "Journal Camp", url: "/journalCamp" },
-    { name: "Blog", url: "/blog" },
-  ];
+
   return (
     <>
      
