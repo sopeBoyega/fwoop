@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { School, BookOpen, Check, Plus } from "lucide-react";
+import { School, BookOpen, Check, Plus, X, Upload } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
 import DotsSpinner from "./spinners/DotsSpinner";
@@ -21,6 +21,8 @@ const JournalEntry = () => {
   
 
   const [loading,setLoading] = useState<boolean>(false)
+    const [images, setImages] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
   const [formData, setFormData] = useState({
     schoolName: "",
@@ -51,49 +53,115 @@ const JournalEntry = () => {
     setMilestones((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
 
-    if (!formData.schoolName || !formData.date || !formData.actions) {
+    // Validate file types
+    const validFiles = files.filter(file => file.type.startsWith('image/'));
+    if (validFiles.length !== files.length) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
+        title: "Invalid Files",
+        description: "Please select only image files.",
+        variant: "destructive"
       });
       return;
     }
 
-    console.log("Journal Entry Submitted:", { ...formData, milestones });
+    // Add new images
+    setImages(prev => [...prev, ...validFiles]);
 
-    try {
-
-      setLoading(true)
-      await axios.post(
-        "https://foodproj-backend-4y4z.onrender.com/api/journal/add",
-        {...formData,milestones}
-      );
-      toast({
-        title: "Journal Entry Submitted! 🌱",
-        description:
-          "Your food waste journey progress has been recorded successfully.",
-      });
-      setFormData({
-        schoolName: "",
-        date: "",
-        wasteReduction: "",
-        actions: "",
-        challenges: "",
-        nextSteps: "",
-        wasteAmount: "",
-      });
-      setMilestones([]);
-    } catch (error) {
-      console.error("Failed to send data", error);
-    }
-    finally {
-      setLoading(false)
-    }
+    // Create previews
+    validFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target?.result) {
+          setImagePreviews(prev => [...prev, e.target!.result as string]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
   };
+
+   const removeImage = (index: number) => {
+    setImages(prev => prev.filter((_, i) => i !== index));
+    setImagePreviews(prev => prev.filter((_, i) => i !== index));
+  };
+
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!formData.schoolName || !formData.date || !formData.actions) {
+    toast({
+      title: "Missing Information",
+      description: "Please fill in all required fields.",
+      variant: "destructive",
+    });
+    return;
+  }
+
+  console.log("Submitting form...");
+
+  const data = new FormData();
+
+  // Append text fields
+  Object.entries(formData).forEach(([key, value]) => {
+    data.append(key, value);
+  });
+
+  // Append milestones
+  milestones.forEach((milestone, index) => {
+    data.append(`milestones[${index}]`, milestone);
+  });
+
+  // Append multiple images
+  images.forEach((image) => {
+    data.append("images", image); // key must match what your backend expects
+  });
+
+  try {
+    setLoading(true);
+    await axios.post(
+      "https://foodproj-backend-4y4z.onrender.com/api/journal/add",
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    toast({
+      title: "Journal Entry Submitted! 🌱",
+      description:
+        "Your food waste journey progress has been recorded successfully.",
+    });
+
+    // Reset form
+    setFormData({
+      schoolName: "",
+      date: "",
+      wasteReduction: "",
+      actions: "",
+      challenges: "",
+      nextSteps: "",
+      wasteAmount: "",
+    });
+    setMilestones([]);
+    setImages([]);
+    setImagePreviews([]);
+  } catch (error) {
+    console.error("Failed to send data", error);
+    toast({
+      title: "Submission Failed",
+      description: "Something went wrong while submitting the journal.",
+      variant: "destructive",
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-white">
@@ -182,6 +250,50 @@ const JournalEntry = () => {
                       </SelectContent>
                     </Select>
                   </div>
+                </div>
+
+                 {/* Image Upload Section */}
+                <div className="space-y-3">
+                  <Label className="text-primary font-semibold">Add Images</Label>
+                  <div className="border-2 border-dashed border-primary/30 rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
+                    <div className="flex flex-col items-center gap-2">
+                      <Upload className="h-8 w-8 text-muted-foreground" />
+                      <p className="text-sm text-muted-foreground">
+                        Upload images of your food waste reduction activities
+                      </p>
+                      <Input
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="max-w-xs"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Image Previews */}
+                  {imagePreviews.length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {imagePreviews.map((preview, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={preview}
+                            alt={`Preview ${index + 1}`}
+                            className="w-full h-24 object-cover rounded-lg border border-border"
+                          />
+                          <Button
+                            type="button"
+                            variant="solid"
+                            
+                            className="absolute top-1 right-1 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                            onClick={() => removeImage(index)}
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-2">

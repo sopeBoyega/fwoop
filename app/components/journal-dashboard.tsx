@@ -18,6 +18,7 @@ export type WasteReport = {
   wasteAmount: string;
   progress?: number;
   actions: string;
+  images: string[];
   challenges: string;
   nextSteps: string;
   milestones: string[];

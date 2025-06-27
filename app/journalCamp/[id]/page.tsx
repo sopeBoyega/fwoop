@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/ca
 import { Button } from '@radix-ui/themes';
 import { Badge } from '@/app/components/ui/badge';
 import { Progress } from '@/app/components/ui/progress';
-import { School, Calendar, BookOpen, ArrowLeft, Check, Target, AlertCircle, ArrowRight } from 'lucide-react';
+import { School, Calendar, BookOpen, ArrowLeft, Check, Target, AlertCircle, ArrowRight, Image } from 'lucide-react';
 import { WasteReport } from '@/app/components/journal-dashboard';
 import axios from 'axios';
 
@@ -96,6 +96,32 @@ if (!journalEntries?.length) {
               </div>
             </CardContent>
           </Card>
+
+           {/* Images Gallery */}
+          {entry?.images && entry?.images.length > 0 && (
+            <Card className="shadow-md border-primary/20 animate-scale-in mb-6">
+              <CardHeader>
+                <CardTitle className="text-primary flex items-center gap-2">
+                  <Image className="h-6 w-6" />
+                  Activity Images
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {entry.images.map((image, index) => (
+                    <div key={index} className="relative group overflow-hidden rounded-lg">
+                      <img
+                         src={image ? `https://foodproj-backend-4y4z.onrender.com/images/${image}` : "/ngga.jpg"} // Fallback image if url is undefined
+                        alt={`Activity image ${index + 1}`}
+                        className="w-full h-48 object-cover transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Milestones */}
           {(entry?.milestones?.length ?? 0) > 0 && (
