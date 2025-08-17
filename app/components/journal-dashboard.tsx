@@ -231,11 +231,17 @@ const JournalDashboard = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Total Waste Reduced</span>
-                    <span className="font-bold text-green-600">127 kg/day</span>
+                    {
+                      journalEntries.reduce((total, entry) => {
+                        const wasteAmount = Number(entry.wasteAmount) || 0;
+                        const wasteReduction = Number(entry.wasteReduction) || 0;
+                        return total + (wasteAmount * wasteReduction) / 100;
+                      }, 0).toFixed(2)
+                    } kg/day
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Active Programs</span>
-                    <span className="font-bold text-green-800">5</span>
+                    <span className="font-bold text-green-800">1</span>
                   </div>
                 </CardContent>
               </Card>

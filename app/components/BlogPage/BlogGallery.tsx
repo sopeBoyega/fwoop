@@ -5,7 +5,7 @@ interface BlogGalleryProps {
   images: string[];
 }
 
-const BlogGallery: React.FC<BlogGalleryProps> = ({ images }) => {
+const BlogGallery: React.FC<BlogGalleryProps> = ({ images  }) => {
   if (!images.length) return null;
   if (images.length === 1)
     return (
@@ -23,9 +23,9 @@ const BlogGallery: React.FC<BlogGalleryProps> = ({ images }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
       {images.map((img, idx) => (
-        <Image
+        <img
           key={img}
-          src={img}
+          src={`https://foodproj-backend-4y4z.onrender.com/images/${img}`}
           alt={`Gallery image ${idx + 1}`}
           className="rounded-lg object-cover w-full max-h-96"
           width={600}

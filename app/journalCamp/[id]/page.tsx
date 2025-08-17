@@ -15,7 +15,7 @@ const JournalDetail = () => {
   const { id } = useParams();
   const [journalEntries,setJournalEntries] = useState<Array<WasteReport>>()
 
-  // Mock data - in real app this would come from your database based on the ID
+  
 
  useEffect(() => {
   const getJournalEntries = async () => {
@@ -37,7 +37,7 @@ const idString = Array.isArray(id) ? id[0] : id ?? '1';
 const entry = (journalEntries ?? []).find(e => e.id === parseInt(idString, 10));
 
 if (!journalEntries?.length) {
-    return <div className='flex items-center justify-center text-bold text-[24px] text-black'>No Journal Entries Present at the Moment</div>
+    return <div className='flex items-center justify-center text-bold text-[24px] text-black'>Loading...</div>
   }
   return (
     <div className="min-h-screen bg-gradient-to-br from-school-green-light to-white school-pattern">
