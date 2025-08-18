@@ -53,6 +53,7 @@ const BlogPost = () => {
    
       } catch (err) {
         setBlogPosts([]);
+        console.error(err);
       } finally {
         // setLoading(false);
       }

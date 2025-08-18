@@ -25,6 +25,7 @@ const Blog = () => {
         setBlogs(response?.data?.data || []);
       } catch (err) {
         setBlogs([]);
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -59,7 +60,7 @@ const Blog = () => {
               <div className="col-span-3 text-center text-muted-foreground">No blog blogs found.</div>
             ) : (
               blogs.map((p) => (
-                <Link href={`/blog/${p.slug}`}>
+                <Link href={`/blog/${p.slug}`} key={p.slug}>
                  
                  <BlogCard post={p} key={p.slug} />
                  </Link>

@@ -6,7 +6,7 @@ import { Textarea } from "@/app/components/ui/textarea";
 import { Label } from "@/app/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { Badge } from "@/app/components/ui/badge";
-import { ArrowLeft, Plus, X, Upload, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Plus, X, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/app/hooks/use-toast";
 import slugify from "slugify";
@@ -124,6 +124,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
         description: "Failed to create blog post. Please try again.",
         variant: "destructive"
       });
+      console.log(error)
     }
   };
 
@@ -142,7 +143,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
         <Card className="border-primary/20">
           <CardHeader>
-            <CardTitle className="text-xl text-primary">Share Your School's Food Waste Initiative</CardTitle>
+            <CardTitle className="text-xl text-primary">Share Your School`&apos;`s Food Waste Initiative</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">

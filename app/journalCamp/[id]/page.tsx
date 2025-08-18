@@ -102,7 +102,7 @@ if (!journalEntries?.length) {
             <Card className="shadow-md border-primary/20 animate-scale-in mb-6">
               <CardHeader>
                 <CardTitle className="text-primary flex items-center gap-2">
-                  <Image className="h-6 w-6" />
+                  <Image className="h-6 w-6"  />
                   Activity Images
                 </CardTitle>
               </CardHeader>
