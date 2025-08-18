@@ -143,7 +143,7 @@ const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
         <Card className="border-primary/20">
           <CardHeader>
-            <CardTitle className="text-xl text-primary">Share Your School`&apos;`s Food Waste Initiative</CardTitle>
+            <CardTitle className="text-xl text-primary">Share Your School&apos;s Food Waste Initiative</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">

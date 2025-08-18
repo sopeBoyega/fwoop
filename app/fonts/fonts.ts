@@ -5,5 +5,5 @@ import { Outfit } from "next/font/google";
 export const outfit = Outfit({ subsets: ["latin"] });
 export const notoSans = Noto_Sans({ subsets: ["latin"] });
 
-export const inter = Inter({ subsets: ["latin"] });
+export const inter = Inter({ subsets: ["latin"],variable: "--font-inter", });
 export const PJS = Plus_Jakarta_Sans({subsets: ["latin"]})
