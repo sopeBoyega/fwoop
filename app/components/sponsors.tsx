@@ -25,7 +25,7 @@ const SponsorsSection = () => {
               height={80}
               className="w-20 h-20 rounded-full object-cover border-2 border-green-500"
             />
-            <p className="text-sm text-gray-700">{sponsor.name}</p>
+            <p className="text-sm text-gray-700 font-bold">{sponsor.name}</p>
             </div>
         ))}
       </div>

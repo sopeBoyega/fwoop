@@ -43,7 +43,7 @@ const Blog = () => {
               <span className="inline-block px-4 py-2 rounded school-gradient text-white font-semibold shadow hover:opacity-90 transition-opacity hover-scale">Gallery</span>
             </Link>
             <Link href="/blog/create">
-              <Button className="school-gradient text-white uppercase font-bold flex items-center gap-2" size="lg">
+              <Button className="school-gradient text-white font-bold flex items-center gap-2" size="lg">
                 Create
               </Button>
             </Link>

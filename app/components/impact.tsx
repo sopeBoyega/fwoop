@@ -6,13 +6,13 @@ import { GraduationCap, Presentation} from "lucide-react";
 const impactData = [
   {
     label: "Students Reached",
-    value: 200,
+    value: 500,
     suffix: "+",
     icon: <GraduationCap className="text-green-600" />,
   },
   {
     label: "Workshops Held",
-    value: 1,
+    value: 15,
     icon: <Presentation className="text-green-600" />,
   },
   // {
